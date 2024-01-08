@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="CalApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="lib.js"></script>
+    <script>
+        var app=angular.module("CalApp",[]);
+        app.controller("Calctrl", function($scope)
+        {
+            $scope.calculator=function()
+            {
+                switch($scope.operator)
+                {
+                    case'+': $scope.res=$scope.n1+$scope.n2;
+                             break;
+                    case'-': $scope.res=$scope.n1-$scope.n2;
+                             break;
+                    case'*': $scope.res=$scope.n1*$scope.n2;
+                             break;
+                    case'/': if($scope.n2!=0){ 
+                                $scope.res=$scope.n1/$scope.n2;
+                            }
+                             break;
+                    case'%': $scope.res=$scope.n1%$scope.n2;
+                             break;
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-controller="Calctrl">
+    Enter number 1:<input type="number" ng-model="n1"><br><br>
+    Enter number 2:<input type="number" ng-model="n2"><br><br>
+    Select Operator<Select ng-model="operator">
+        <option value="+">Add</option>
+        <option value="-">Subtract</option>
+        <option value="*">Multiply</option>
+        <option value="/">Divide</option>
+        <option value="%">Remainder</option>
+    </Select>
+    <button ng-click="calculator()">Cal</button><br><br>
+    Result : {{res}}
+</body>
+</html>
