@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="ShopApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <script src="lib.js"></script>
+    <script>
+        var app=angular.module("ShopApp",[]);
+        app.controller("Shopctrl", function($scope){
+            $scope.items=["Milk", "Cheese", "Banana"];
+            $scope.Additem=function(Newitem)
+            {
+                $scope.items.push(Newitem);
+                $scope.Newitem="";
+            }
+            $scope.Removeitem=function(index)
+            {
+                $scope.items.splice(index, 1);
+            }
+        });
+    </script>
+</head>
+<body ng-controller="Shopctrl">
+    <table>
+        <tr ng-repeat="item in items">
+            <td>{{item}}</td>
+            <td><button ng-click="Removeitem($index)">Remove</button></td>
+        </tr>
+    </table>
+    <input type="text" ng-model="Newitem">
+    <button ng-click="Additem(Newitem)">Add</button>
+</body>
+</html>
+C:\Users\Student\Desktop\184\1rn21cs022\lab2.html
