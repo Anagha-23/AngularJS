@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="crudApp">
+<head>
+    <title>AngularJS CRUD Application</title>
+    <script src="lib.js"></script>
+</head> 
+<body ng-controller="crudCtrl">
+    <h1>User Management</h1>
+ 
+    <!-- Form for adding a new user -->
+    <form ng-submit="addUser()">
+        Name:
+        <input type="text" ng-model="name" required><br>
+        <br>
+        Age:
+        <input type="number" ng-model="age" required><br>
+        <br>
+        Email:
+        <input type="email" ng-model="email" required><br><br>
+        <button type="submit">Add User</button>
+    </form>
+    <br>
+ 
+    <!-- Table to display user information -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{ user.name }}</td>
+                <td>{{ user.age }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <button ng-click="editUser($index)">Edit</button>
+                    <button ng-click="deleteUser($index)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+ 
+    <script>
+        var app = angular.module('crudApp', []);
+ 
+        app.controller('crudCtrl', function($scope) {
+            $scope.users = [];
+                $scope.addUser = function() {
+                $scope.users.push({ name: $scope.name, age: $scope.age,email:$scope.email });
+                $scope.name = '';
+                $scope.age = '';
+                $scope.email='';
+ 
+            };
+ 
+            $scope.editUser = function($index) {
+               // Prompt for updated values with validation
+                var updatedName = prompt('Enter updated name:');
+                var updatedAge = prompt('Enter updated age:');
+                var updatedEmail = prompt('Enter updated email:');  
+ 
+                // Check if the user pressed cancel
+                if (!(updatedName == null && updatedAge == null && updatedEmail==null) ){
+                    // Update the user
+                    var updatedUser = {name: updatedName, age: parseInt(updatedAge) , email:updatedEmail };
+                    $scope.users.splice($index, 1, updatedUser);
+                }
+            };
+ 
+            $scope.deleteUser = function($index) {
+                var confirmdel=confirm("sure do you want to delete")
+                if(confirmdel)
+               $scope.users.splice($index, 1);
+            };
+        });
+    </script>
+</body>
+</html>
