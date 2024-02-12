@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>login form</title>
+  <script src ="lib.js"></script>
+  <script>
+  var app = angular.module("loginApp",[]);
+  app.controller("loginCntrl",function($scope)
+  {
+    $scope.name='';
+    $scope.password='';
+    $scope.login=function()
+    {
+      if($scope.name=='Anagha' && $scope.password=='anagha@2368')
+      {
+        alert("login successfully");
+      }
+      else
+    {
+      alert("unsuccessful");
+    }
+  }
+});
+</script>
+</head>
+<body ng-app="loginApp" ng-controller="loginCntrl">
+<form ng-submmit ="login()">
+  <h1>Login form</h1>
+  <label>Name</label>
+  <input type="text" ng-model="name" placeholder="Enter the name" required><br><br>
+  <label>password</label>
+  <input type="password" ng-model="password" required><br><br>
+  <button ng-click="login()">Submit</button><br><br>
+</form>
+</body>
+</html>
